@@ -80,3 +80,11 @@ further validation is required to rule out potential overfitting or data leakage
 - Cross-validation
 - Larger dataset collection
 - Deployment pipeline integration
+
+## Visual Results
+
+### Confusion Matrix
+![Confusion Matrix](results/confusion_matrix.png)
+
+### ROC Curve
+![ROC Curve](results/roc_curve.png)
