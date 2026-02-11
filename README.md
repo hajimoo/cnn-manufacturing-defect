@@ -18,7 +18,7 @@ Therefore, **Recall** was treated as the primary evaluation metric.
 The dataset is highly imbalanced.
 
 | Split | Normal | Defective |
-|-------|--------|-----------|
+|------:|-------:|----------:|
 | Train | 1102   | 59        |
 | Test  | 276    | 15        |
 
@@ -43,7 +43,7 @@ The dataset is highly imbalanced.
 ## Evaluation Metrics
 - Accuracy
 - Precision
-- Recall (Primary Metric)
+- **Recall (Primary Metric)**
 - F1-score
 - Confusion Matrix
 - ROC Curve
@@ -51,11 +51,18 @@ The dataset is highly imbalanced.
 ---
 
 ## Results
-
 The model achieved high performance on the test dataset.
 
 However, due to the small dataset size and possible data similarity,
 further validation is required to rule out potential overfitting or data leakage.
+
+---
+
+## How to Run
+
+1. Open `notebook.ipynb` in Google Colab.
+2. Mount Google Drive and set `dir_path` to your dataset directory.
+3. Run all cells from top to bottom.
 
 ---
 
