@@ -83,8 +83,9 @@ further validation is required to rule out potential overfitting or data leakage
 
 ## Visual Results
 
-### Confusion Matrix
-![Confusion Matrix](results/confusion_matrix.png)
 
 ### ROC Curve
 ![ROC Curve](results/roc_curve.png)
+
+### Prediction Probability Distribution
+![Probability Distribution](results/probability_histogram.png)
