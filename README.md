@@ -3,47 +3,73 @@
 ## Overview
 This project builds a CNN-based image classification model to detect defective products in manufacturing images.
 
+The goal is not only high accuracy but minimizing false negatives, which is critical in real production environments.
+
+---
+
 ## Motivation
-In real manufacturing environments, missing defective products (false negatives) can cause significant losses.
-Therefore, Recall was treated as the most important metric.
+In manufacturing systems, missing defective products (false negatives) can lead to serious financial and safety risks.  
+Therefore, **Recall** was treated as the primary evaluation metric.
+
+---
 
 ## Dataset
-- Training:
-  - Normal: 1102
-  - Defective: 59
-- Test:
-  - Normal: 276
-  - Defective: 15
 
 The dataset is highly imbalanced.
 
+| Split | Normal | Defective |
+|-------|--------|-----------|
+| Train | 1102   | 59        |
+| Test  | 276    | 15        |
+
+---
+
 ## Preprocessing
-- Resize to 256x256
-- Normalize pixel values (0–1)
-- RGB conversion
+- Resize images to 256x256
+- Normalize pixel values to [0, 1]
+- Convert to RGB format
 - Label encoding (0: normal, 1: defect)
+
+---
 
 ## Model
 - AutoKeras ImageClassifier
 - Loss: Binary Cross Entropy
-- Metric: Accuracy
 - Validation split: 0.2
-- Epoch: 3
+- Epochs: 3
+
+---
 
 ## Evaluation Metrics
 - Accuracy
 - Precision
-- Recall
+- Recall (Primary Metric)
 - F1-score
 - Confusion Matrix
 - ROC Curve
 
-## Result
-The model achieved high performance on the test set.
-However, due to limited data size and possible data similarity, further validation is required.
+---
+
+## Results
+
+The model achieved high performance on the test dataset.
+
+However, due to the small dataset size and possible data similarity,
+further validation is required to rule out potential overfitting or data leakage.
+
+---
+
+## Limitations
+- Small dataset size
+- Severe class imbalance
+- Limited hyperparameter tuning
+- No external validation set
+
+---
 
 ## Future Improvements
 - Data augmentation
 - Class weighting
 - Cross-validation
 - Larger dataset collection
+- Deployment pipeline integration
