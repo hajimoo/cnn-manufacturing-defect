@@ -1,5 +1,5 @@
 > **Portfolio note (Backend direction):**  
-> This project is an ML reliability demo. Next step is to expose inference via a REST API with request validation and logging (backend/product engineering direction).
+> This repository demonstrates model reliability evaluation and serves as a foundation for future backend/API integration.
 
 # CNN-based Manufacturing Defect Detection (Portfolio Project)
 
@@ -69,6 +69,7 @@ Metrics used:
 ## 6. Results & Reliability Discussion
 
 The model showed strong performance on the test dataset.
+The evaluation process focused on avoiding misleading metrics caused by class imbalance.
 
 However, due to:
 
@@ -120,7 +121,7 @@ This project demonstrated that:
 - Logging prediction results for monitoring
   markdown
   
-## Why this project matters for backend engineering
+## Backend Engineering Perspective
 
 This project taught me that reliable systems require:
 
