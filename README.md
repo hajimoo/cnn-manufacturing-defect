@@ -1,3 +1,6 @@
+> **Portfolio note (Backend direction):**  
+> This project is an ML reliability demo. Next step is to expose inference via a REST API with request validation and logging (backend/product engineering direction).
+
 # CNN-based Manufacturing Defect Detection (Portfolio Project)
 
 ## 1. Problem
