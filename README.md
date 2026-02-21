@@ -1,21 +1,28 @@
-# CNN-based Manufacturing Defect Detection
+# CNN-based Manufacturing Defect Detection (Portfolio Project)
 
-## Overview
-This project builds a CNN-based image classification model to detect defective products in manufacturing images.
+## 1. Problem
 
-The goal is not only high accuracy but minimizing false negatives, which is critical in real production environments.
+In manufacturing environments, missing defective products (false negatives) can cause serious financial and safety risks.
 
----
-
-## Motivation
-In manufacturing systems, missing defective products (false negatives) can lead to serious financial and safety risks.  
-Therefore, **Recall** was treated as the primary evaluation metric.
+This project focuses not only on achieving high accuracy,
+but on building a **reliable defect detection system under severe class imbalance**.
 
 ---
 
-## Dataset
+## 2. Engineering Focus (What I Did)
 
-The dataset is highly imbalanced.
+- Built a CNN classifier using TensorFlow + AutoKeras
+- Designed evaluation prioritizing **Recall** instead of accuracy
+- Investigated dataset imbalance and potential evaluation bias
+- Verified model reliability using multiple metrics:
+  Precision, Recall, F1-score, Confusion Matrix, ROC Curve
+- Documented risks such as small dataset size and possible data similarity
+
+---
+
+## 3. Dataset
+
+Highly imbalanced dataset:
 
 | Split | Normal | Defective |
 |------:|-------:|----------:|
@@ -24,23 +31,29 @@ The dataset is highly imbalanced.
 
 ---
 
-## Preprocessing
-- Resize images to 256x256
-- Normalize pixel values to [0, 1]
-- Convert to RGB format
-- Label encoding (0: normal, 1: defect)
+## 4. Approach
 
----
+### Preprocessing
+- Resize images to 256x256  
+- Normalize pixel values to [0,1]  
+- Convert to RGB  
+- Label encoding (0 normal / 1 defect)
 
-## Model
+### Model
 - AutoKeras ImageClassifier
-- Loss: Binary Cross Entropy
-- Validation split: 0.2
-- Epochs: 3
+- Binary Cross Entropy loss
+- Validation split 0.2
+- Epochs 3
 
 ---
 
-## Evaluation Metrics
+## 5. Evaluation Strategy
+
+Instead of relying on accuracy alone,
+the evaluation prioritized **Recall**, because missing defective products is the most critical failure in real production systems.
+
+Metrics used:
+
 - Accuracy
 - Precision
 - **Recall (Primary Metric)**
@@ -50,42 +63,55 @@ The dataset is highly imbalanced.
 
 ---
 
-## Results
-The model achieved high performance on the test dataset.
+## 6. Results & Reliability Discussion
 
-However, due to the small dataset size and possible data similarity,
-further validation is required to rule out potential overfitting or data leakage.
+The model showed strong performance on the test dataset.
 
----
+However, due to:
 
-## How to Run
+- small dataset size  
+- severe class imbalance  
+- possible similarity between training and test samples  
 
-1. Open `notebook.ipynb` in Google Colab.
-2. Mount Google Drive and set `dir_path` to your dataset directory.
-3. Run all cells from top to bottom.
+the result may be optimistic.
 
----
-
-## Limitations
-- Small dataset size
-- Severe class imbalance
-- Limited hyperparameter tuning
-- No external validation set
+Additional validation such as cross-validation or external datasets would be required for production deployment.
 
 ---
 
-## Future Improvements
-- Data augmentation
-- Class weighting
-- Cross-validation
-- Larger dataset collection
-- Deployment pipeline integration
-
-## Visual Results
-
+## 7. Visual Results
 
 ### ROC Curve
 ![ROC Curve](results/roc_curve.png)
 
 ### Prediction Probability Distribution
 ![Probability Distribution](results/probability_histogram.png)
+
+---
+
+## 8. Key Engineering Learnings
+
+This project demonstrated that:
+
+- High accuracy alone does not guarantee reliability
+- Dataset structure and evaluation bias must be verified
+- Model validation must consider real operational risks
+
+---
+
+## 9. How to Run
+
+1. Open `notebook.ipynb` in Google Colab  
+2. Mount Google Drive and set dataset path  
+3. Run all cells  
+
+---
+
+## 10. Future Work (Toward Production)
+
+- Data augmentation
+- Class weighting
+- Cross-validation
+- Larger dataset collection
+- REST API deployment for automated inspection
+- Logging prediction results for monitoring
