@@ -122,6 +122,7 @@ This project demonstrated that:
   markdown
   
 ## Backend Engineering Perspective
+This project was designed with the assumption that the model would eventually be integrated into a web service.
 
 This project taught me that reliable systems require:
 
