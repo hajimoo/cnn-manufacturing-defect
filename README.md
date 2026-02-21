@@ -118,3 +118,15 @@ This project demonstrated that:
 - Larger dataset collection
 - REST API deployment for automated inspection
 - Logging prediction results for monitoring
+  markdown
+  
+## Why this project matters for backend engineering
+
+This project taught me that reliable systems require:
+
+- validated input data
+- reproducible pipelines
+- logging for debugging
+- clear evaluation criteria
+
+These principles are directly applicable to backend system design.
