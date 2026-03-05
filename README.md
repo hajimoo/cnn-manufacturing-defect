@@ -1,134 +1,191 @@
-> **Portfolio note (Backend direction):**  
-> This repository demonstrates model reliability evaluation and serves as a foundation for future backend/API integration.
+Manufacturing Defect Detection (Recall-First Approach)
 
-# CNN-based Manufacturing Defect Detection (Portfolio Project)
+Reliable defect detection under severe class imbalance.
 
-## 1. Problem
+This project explores how evaluation metrics can become misleading in manufacturing inspection systems and demonstrates a recall-focused evaluation strategy for defect detection models.
 
-In manufacturing environments, missing defective products (false negatives) can cause serious financial and safety risks.
+The repository also serves as a foundation for future backend/API integration.
 
-This project focuses not only on achieving high accuracy,
-but on building a **reliable defect detection system under severe class imbalance**.
+Problem
+
+In manufacturing environments, missing a defective product (false negative) can cause serious financial and safety risks.
+
+However, many machine learning projects evaluate models primarily using accuracy, which can be misleading when datasets are highly imbalanced.
+
+During initial experiments, the model achieved high accuracy despite failing to detect some defective samples.
+
+This led to a key question:
+
+How can we evaluate model reliability when the dataset is severely imbalanced?
+
+This project focuses on building a reliability-oriented evaluation process, rather than simply maximizing accuracy.
 
 ---
 
-## 2. Engineering Focus (What I Did)
+Dataset
 
-- Built a CNN classifier using TensorFlow + AutoKeras
-- Designed evaluation prioritizing **Recall** instead of accuracy
-- Investigated dataset imbalance and potential evaluation bias
-- Verified model reliability using multiple metrics:
-  Precision, Recall, F1-score, Confusion Matrix, ROC Curve
-- Documented risks such as small dataset size and possible data similarity
-
----
-
-## 3. Dataset
-
-Highly imbalanced dataset:
+The dataset used in this project is highly imbalanced.
 
 | Split | Normal | Defective |
 |------:|-------:|----------:|
 | Train | 1102   | 59        |
 | Test  | 276    | 15        |
+Because defective samples are rare, a model can achieve high accuracy simply by predicting “normal” most of the time.
 
+This makes accuracy an unreliable metric for real manufacturing environments.
 ---
 
-## 4. Approach
+Approach
+Model
 
-### Preprocessing
-- Resize images to 256x256  
-- Normalize pixel values to [0,1]  
-- Convert to RGB  
-- Label encoding (0 normal / 1 defect)
+To quickly prototype a CNN classifier, the following tools were used:
 
-### Model
-- AutoKeras ImageClassifier
-- Binary Cross Entropy loss
-- Validation split 0.2
-- Epochs 3
+TensorFlow
 
----
+AutoKeras ImageClassifier
 
-## 5. Evaluation Strategy
+AutoKeras allowed rapid experimentation without spending excessive time manually designing CNN architectures.
 
-Instead of relying on accuracy alone,
-the evaluation prioritized **Recall**, because missing defective products is the most critical failure in real production systems.
+Model configuration:
+
+Loss: Binary Cross Entropy
+
+Validation split: 0.2
+
+Epochs: 3
+
+Preprocessing
+
+Resize images to 256 × 256
+
+Normalize pixel values to [0,1]
+
+Convert images to RGB
+
+Label encoding
+
+0 = normal
+
+1 = defect
+
+Evaluation Strategy (Recall-First)
+
+Initial experiments showed that accuracy alone was misleading due to class imbalance.
+
+Since missing a defective product is the most critical failure in real manufacturing systems, the evaluation strategy was redesigned to prioritize Recall.
 
 Metrics used:
 
-- Accuracy
-- Precision
-- **Recall (Primary Metric)**
-- F1-score
-- Confusion Matrix
-- ROC Curve
+Accuracy
 
----
+Precision
 
-## 6. Results & Reliability Discussion
+Recall (primary metric)
+
+F1-score
+
+Confusion Matrix
+
+ROC Curve
+
+This approach better reflects the real operational risks of manufacturing inspection systems.
+
+Results & Reliability Discussion
 
 The model showed strong performance on the test dataset.
-The evaluation process focused on avoiding misleading metrics caused by class imbalance.
 
-However, due to:
+However, several risks remain:
 
-- small dataset size  
-- severe class imbalance  
-- possible similarity between training and test samples  
+small dataset size
 
-the result may be optimistic.
+severe class imbalance
 
-Additional validation such as cross-validation or external datasets would be required for production deployment.
+possible similarity between training and test samples
+
+Because of these factors, the results may be optimistic.
+
+Before real deployment, additional validation such as:
+
+cross-validation
+
+external datasets
+
+would be required.
 
 ---
 
-## 7. Visual Results
+Visual Results
 
-### ROC Curve
+ROC Curve
 ![ROC Curve](results/roc_curve.png)
 
-### Prediction Probability Distribution
+Prediction Probability Distribution
 ![Probability Distribution](results/probability_histogram.png)
 
 ---
 
-## 8. Key Engineering Learnings
+Key Engineering Learnings
 
-This project demonstrated that:
+This project highlighted several important engineering insights:
 
-- High accuracy alone does not guarantee reliability
-- Dataset structure and evaluation bias must be verified
-- Model validation must consider real operational risks
+High accuracy does not guarantee reliable defect detection
 
----
+Dataset structure can strongly influence evaluation results
 
-## 9. How to Run
+Model validation must consider real operational risks
 
-1. Open `notebook.ipynb` in Google Colab  
-2. Mount Google Drive and set dataset path  
-3. Run all cells  
+Future Work (Toward Production)
 
----
+Possible improvements:
 
-## 10. Future Work (Toward Production)
+data augmentation
 
-- Data augmentation
-- Class weighting
-- Cross-validation
-- Larger dataset collection
-- REST API deployment for automated inspection
-- Logging prediction results for monitoring
-  markdown
-  
-## Backend Engineering Perspective
+class weighting
+
+cross-validation
+
+larger dataset collection
+
+System-level improvements:
+
+REST API deployment for automated inspection
+
+prediction logging for monitoring
+
+building a full inspection pipeline
+
+Backend Engineering Perspective
+
 This project was designed with the assumption that the model would eventually be integrated into a web service.
 
-This project taught me that reliable systems require:
+Reliable ML systems require more than just training a model. They require:
 
-- validated input data
-- reproducible pipelines
-- logging for debugging
-- clear evaluation criteria
+validated input data
 
-These principles are directly applicable to backend system design.
+reproducible pipelines
+
+logging for debugging
+
+clear evaluation criteria
+
+These principles are directly applicable when building production backend systems for ML services.
+
+How to Run
+
+Open notebook.ipynb in Google Colab
+
+Mount Google Drive and set dataset path
+
+Run all cells
+
+Tech Stack
+
+Python
+
+TensorFlow
+
+AutoKeras
+
+NumPy
+
+Matplotlib
